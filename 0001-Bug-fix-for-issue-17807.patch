@@ -1,0 +1,29 @@
+From d44b0594269f19781693660870d56bc23cfdf8d7 Mon Sep 17 00:00:00 2001
+From: Nyctfall <80650685+nyctfall@users.noreply.github.com>
+Date: Sat, 24 Oct 2026 18:50:12 -0400
+Subject: [PATCH] Bug fix for issue#17807.
+
+Credit: GitHub @awss1i <https://github.com/yt-dlp/yt-dlp/pull/17807>.
+---
+ yt_dlp/extractor/youtube/_tab.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/yt_dlp/extractor/youtube/_tab.py b/yt_dlp/extractor/youtube/_tab.py
+index b0825ef6e..1bc239f10 100644
+--- a/yt_dlp/extractor/youtube/_tab.py
++++ b/yt_dlp/extractor/youtube/_tab.py
+@@ -323,7 +323,10 @@ def _extract_lockup_view_model(self, view_model):
+             ie = YoutubeIE
+             url = f'https://www.youtube.com/watch?v={content_id}'
+             thumb_keys = (None,)
+-        elif content_type in ('LOCKUP_CONTENT_TYPE_PLAYLIST', 'LOCKUP_CONTENT_TYPE_PODCAST'):
++        elif content_type in (
++            'LOCKUP_CONTENT_TYPE_PLAYLIST', 'LOCKUP_CONTENT_TYPE_PODCAST',
++            'LOCKUP_CONTENT_TYPE_SHOW', 'LOCKUP_CONTENT_TYPE_COURSE',
++        ):
+             ie = YoutubeTabIE
+             url = f'https://www.youtube.com/playlist?list={content_id}'
+             thumb_keys = ('collectionThumbnailViewModel', 'primaryThumbnail')
+-- 
+2.56.0
+
